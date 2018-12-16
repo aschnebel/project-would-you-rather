@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import { handleInitialData } from '../actions/shared';
+import { handleInitialData } from "../actions/shared";
 
-function mapStateToProps({users}) {
+function mapStateToProps(state) {
   return {
-    users
+  
   };
 }
 
@@ -16,13 +17,13 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        Hello World!
-      </div>
+      <Router>
+        <Fragment>
+          <div>Hello World!</div>
+        </Fragment>
+      </Router>
     );
   }
 }
 
-export default connect(
-  mapStateToProps,
-)(App);
+export default connect(mapStateToProps)(App);
