@@ -1,12 +1,16 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 import { handleInitialData } from "../actions/shared";
+import { isAuthenticated } from "../utils/auth";
 
-function mapStateToProps(state) {
+import Login from "./Login";
+import Dashboard from "./Dashboard";
+
+function mapStateToProps({ authedUser }) {
   return {
-  
+    authedUser
   };
 }
 
@@ -16,10 +20,19 @@ class App extends Component {
   }
 
   render() {
+    const { authedUser } = this.props;
+
     return (
       <Router>
         <Fragment>
-          <div>Hello World!</div>
+          <div className="container">
+            <Route path="/login" component={Login} />
+            {!isAuthenticated(authedUser) ? (
+              <Redirect to="/login" />
+            ) : (
+              <Route exact path="/" component={Dashboard} />
+            )}
+          </div>
         </Fragment>
       </Router>
     );
