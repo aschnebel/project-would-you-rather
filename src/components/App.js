@@ -25,14 +25,12 @@ class App extends Component {
     return (
       <Router>
         <Fragment>
-          <div className="container">
             <Route path="/login" component={Login} />
             {!isAuthenticated(authedUser) ? (
               <Redirect to="/login" />
             ) : (
               <Route exact path="/" component={Dashboard} />
             )}
-          </div>
         </Fragment>
       </Router>
     );

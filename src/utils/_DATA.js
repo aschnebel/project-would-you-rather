@@ -23,7 +23,7 @@ let users = {
   },
   dan_abramov: {
     id: "dan_abramov",
-    name: '"Dan Abramov',
+    name: "Dan Abramov",
     avatarURL: "https://tylermcginnis.com/would-you-rather/dan.jpg",
     answers: {
       xj352vofupe1dqz9emx13r: "optionOne",
