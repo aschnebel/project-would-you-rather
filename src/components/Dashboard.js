@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { withStyles } from "@material-ui/core/styles";
-import { Grid, Paper } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 import PollPreview from "./PollPreview";
 
@@ -31,12 +31,12 @@ class Dashboard extends Component {
             direction="column"
             justify="center"
             alignItems="center"
-            spacing={16}
+            spacing={8}
           >
             {questionIds.map(id => (
-              <div key={id}>
+              <Grid key={id} item>
                 <PollPreview id={id} />
-              </div>
+              </Grid>
             ))}
           </Grid>
         </Grid>
