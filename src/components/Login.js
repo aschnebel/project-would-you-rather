@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -8,6 +9,8 @@ import Typography from "@material-ui/core/Typography";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
+
+import { authenticate } from "../actions/authedUser";
 
 const styles = theme => ({
   root: {
@@ -19,24 +22,35 @@ const styles = theme => ({
     maxWidth: 400
   },
   select: {
-    marginBottom: '20px'
+    marginBottom: "20px"
   }
 });
 
-const mapStateToProps = ({ users }) => {
+const mapStateToProps = ({ users, authedUser }) => {
   return {
-    users
+    users,
+    id: authedUser
   };
 };
 
 class Login extends Component {
   state = {
-    value: ""
+    value: "",
+    authenticated: false
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    //Todo: Dispatch updateAuthedUser
+
+    const { value } = this.state;
+    const { dispatch, id } = this.props;
+
+    dispatch(authenticate(value));
+
+    this.setState(() => ({
+      value: "",
+      authenticated: id ? false : true
+    }));
   };
 
   handleChange = e => {
@@ -48,7 +62,12 @@ class Login extends Component {
 
   render() {
     const { classes, users } = this.props;
-    const { value } = this.state;
+    const { value, authenticated } = this.state;
+
+    if (authenticated) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <div className={classes.root}>
         <form onSubmit={this.handleSubmit}>
@@ -71,7 +90,11 @@ class Login extends Component {
                   >
                     Please sign in to continue
                   </Typography>
-                  <Select value={value} onChange={this.handleChange} className={classes.select}>
+                  <Select
+                    value={value}
+                    onChange={this.handleChange}
+                    className={classes.select}
+                  >
                     {users &&
                       Object.keys(users).map(userId => (
                         <MenuItem key={userId} value={userId}>
@@ -79,7 +102,12 @@ class Login extends Component {
                         </MenuItem>
                       ))}
                   </Select>
-                  <Button type="submit" color="primary" variant="outlined" disabled={value === ''}>
+                  <Button
+                    type="submit"
+                    color="primary"
+                    variant="outlined"
+                    disabled={value === ""}
+                  >
                     Sign in
                   </Button>
                 </Grid>
