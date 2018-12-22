@@ -4,16 +4,14 @@ import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import {
   Avatar,
-  Button,
   Card,
   CardContent,
   Divider,
-  FormControlLabel,
   Grid,
-  Radio,
-  RadioGroup,
   Typography
 } from "@material-ui/core";
+
+import Question from "./Question";
 
 const styles = theme => ({
   root: {
@@ -37,29 +35,17 @@ const styles = theme => ({
 
 const mapStateToProps = ({ questions, users, authedUser }, props) => {
   const { id } = props.match.params;
-  const question = questions[id];
-  const author = question ? users[question.author] : null;
+  const author = questions[id] ? users[questions[id].author] : null;
   return {
-    question,
+    id,
     author,
     authedUser
   };
 };
 
 class Poll extends Component {
-  state = {
-    value: ""
-  };
-
-  handleChange = value => {
-    this.setState(() => ({
-      value: value
-    }));
-  };
-
   render() {
-    const { classes, author, question } = this.props;
-    const { value } = this.state;
+    const { classes, author, id } = this.props;
     return (
       <Grid container className={classes.root} spacing={16}>
         <Grid item xs={12}>
@@ -92,27 +78,7 @@ class Poll extends Component {
                       justify="center"
                       alignItems="flex-start"
                     >
-                      <Typography variant="overline">
-                        Would you rather
-                      </Typography>
-
-                      <RadioGroup value={value} onChange={e => this.handleChange(e.target.value)}>
-                        <FormControlLabel
-                          value="optionOne"
-                          control={<Radio color="primary" />}
-                          labelPlacement="end"
-                          label={question && question.optionOne.text}
-                        />
-                        <FormControlLabel
-                          value="optionTwo"
-                          control={<Radio color="primary" />}
-                          labelPlacement="end"
-                          label={question && question.optionTwo.text}
-                        />
-                      </RadioGroup>
-                      <Button fullWidth={true} color="primary">
-                        Submit
-                      </Button>
+                      <Question id={id} />
                     </Grid>
                   </Grid>
                 </Grid>
