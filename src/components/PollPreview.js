@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
 
 import { withStyles } from "@material-ui/core/styles";
 import {
   Avatar,
   Button,
   Card,
-  CardActions,
   CardContent,
   Divider,
   Grid,
@@ -38,8 +38,14 @@ const mapStateToProps = ({ questions, users, authedUser }, { id }) => {
 };
 
 class PollPreview extends Component {
+
+  toPoll = (e, id) => {
+    e.preventDefault();
+    this.props.history.push(`/questions/${id}`);
+  };
+
   render() {
-    const { classes, author, question } = this.props;
+    const { classes, author, question, id } = this.props;
     return (
       <Card className={classes.card}>
         <CardContent>
@@ -66,7 +72,7 @@ class PollPreview extends Component {
                 <Typography className={classes.question}>
                   ... {question.optionOne.text.split(" ")[0]}...
                 </Typography>
-                <Button fullWidth={true} color="primary">
+                <Button fullWidth={true} color="primary" onClick={e => this.toPoll(e, id)}>
                   View Pull
                 </Button>
               </Grid>
@@ -78,4 +84,4 @@ class PollPreview extends Component {
   }
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(PollPreview));
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(PollPreview)));
