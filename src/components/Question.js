@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import {
@@ -10,27 +10,36 @@ import {
   Radio
 } from "@material-ui/core";
 
-const mapStateToProps = ({questions, authedUser}, {id}) => {
-  const question = questions[id];
+import { handleAnswerQuestion } from "../actions/questions";
+
+const mapStateToProps = ({ questions, authedUser }, { qid }) => {
+  const question = questions[qid];
   return {
     question,
     authedUser
-  }
-}
+  };
+};
 
 class Question extends Component {
   state = {
-    value: ""
+    answer: ""
   };
 
   handleChange = value => {
     this.setState(() => ({
-      value: value
+      answer: value
     }));
   };
 
+  handleSubmit = e => {
+    const { dispatch, authedUser, qid } = this.props;
+    const { answer } = this.state;
+    e.preventDefault();
+    dispatch(handleAnswerQuestion({ authedUser, qid, answer }));
+  };
+
   render() {
-    const { value } = this.state;
+    const { answer } = this.state;
     const { question } = this.props;
 
     return (
@@ -38,7 +47,7 @@ class Question extends Component {
         <Typography variant="overline">Would you rather</Typography>
 
         <RadioGroup
-          value={value}
+          value={answer}
           onChange={e => this.handleChange(e.target.value)}
         >
           <FormControlLabel
@@ -54,7 +63,11 @@ class Question extends Component {
             label={question && question.optionTwo.text}
           />
         </RadioGroup>
-        <Button fullWidth={true} color="primary">
+        <Button
+          fullWidth={true}
+          color="primary"
+          onClick={e => this.handleSubmit(e)}
+        >
           Submit
         </Button>
       </Fragment>
@@ -63,7 +76,7 @@ class Question extends Component {
 }
 
 Question.propTypes = {
-  id: PropTypes.string.isRequired
+  qid: PropTypes.string.isRequired
 };
 
 export default connect(mapStateToProps)(Question);

@@ -78,7 +78,7 @@ class Poll extends Component {
                       justify="center"
                       alignItems="flex-start"
                     >
-                      <Question id={id} />
+                      <Question qid={id} />
                     </Grid>
                   </Grid>
                 </Grid>
