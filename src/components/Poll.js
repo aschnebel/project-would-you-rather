@@ -1,20 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { withStyles } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core";
-
 import Question from "./Question";
 import Result from "./Result";
-
-const styles = theme => ({
-  root: {
-    flexGrow: 1
-  },
-  questionType: {
-    marginTop: 30
-  }
-});
 
 const mapStateToProps = ({ questions, authedUser }, props) => {
   const { id } = props.match.params;
@@ -27,34 +15,20 @@ const mapStateToProps = ({ questions, authedUser }, props) => {
 };
 
 const _isQuestionAnsweredFor = (question, authedUser) => {
-  return question && (
-    question.optionOne.votes.includes(authedUser) ||
-    question.optionTwo.votes.includes(authedUser)
-  )
-}
+  return (
+    question &&
+    (question.optionOne.votes.includes(authedUser) ||
+      question.optionTwo.votes.includes(authedUser))
+  );
+};
 
 class Poll extends Component {
   render() {
-    const { classes, question, authedUser, id } = this.props;
-    return (
-      <Grid container className={classes.root} spacing={16}>
-        <Grid item xs={12}>
-          <Grid
-            className={classes.questionType}
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            spacing={16}
-          >
-            {_isQuestionAnsweredFor(question, authedUser)
-             ? <Result qid={id} />
-             : <Question qid={id} />}
-          </Grid>
-        </Grid>
-      </Grid>
-    );
+    const { question, authedUser, id } = this.props;
+    return _isQuestionAnsweredFor(question, authedUser) 
+            ? (<Result qid={id} />) 
+            : (<Question qid={id} />);
   }
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(Poll));
+export default connect(mapStateToProps)(Poll);

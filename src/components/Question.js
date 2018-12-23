@@ -19,9 +19,6 @@ import {
 import { handleAnswerQuestion } from "../actions/questions";
 
 const styles = theme => ({
-  questionType: {
-    marginTop: 30
-  },
   card: {
     minWidth: 400
   },
@@ -93,6 +90,7 @@ class Question extends Component {
 
                 <RadioGroup
                   value={answer}
+                  className={classes.question}
                   onChange={e => this.handleChange(e.target.value)}
                 >
                   <FormControlLabel

@@ -15,9 +15,6 @@ import {
 import Vote from "./Vote";
 
 const styles = theme => ({
-  questionType: {
-    marginTop: 30
-  },
   card: {
     minWidth: 400
   },
