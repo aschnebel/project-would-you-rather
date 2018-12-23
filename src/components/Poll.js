@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 
 import Question from "./Question";
+import Result from "./Result";
 
 const styles = theme => ({
   root: {
@@ -15,16 +16,26 @@ const styles = theme => ({
   }
 });
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = ({ questions, authedUser }, props) => {
   const { id } = props.match.params;
+  const question = questions[id];
   return {
-    id
+    id,
+    question,
+    authedUser
   };
 };
 
+const _isQuestionAnsweredFor = (question, authedUser) => {
+  return question && (
+    question.optionOne.votes.includes(authedUser) ||
+    question.optionTwo.votes.includes(authedUser)
+  )
+}
+
 class Poll extends Component {
   render() {
-    const { classes, id } = this.props;
+    const { classes, question, authedUser, id } = this.props;
     return (
       <Grid container className={classes.root} spacing={16}>
         <Grid item xs={12}>
@@ -36,7 +47,9 @@ class Poll extends Component {
             alignItems="center"
             spacing={16}
           >
-            <Question qid={id} />
+            {_isQuestionAnsweredFor(question, authedUser)
+             ? <Result qid={id} />
+             : <Question qid={id} />}
           </Grid>
         </Grid>
       </Grid>
