@@ -9,6 +9,7 @@ import { Grid } from "@material-ui/core";
 import { handleInitialData } from "../actions/shared";
 import { isAuthenticated } from "../utils/auth";
 
+import Nav from './Nav';
 import Login from "./Login";
 import Dashboard from "./Dashboard";
 import Poll from "./Poll";
@@ -46,6 +47,7 @@ class App extends Component {
     return (
       <Router>
         <Fragment>
+          <Nav />
           {/* <Route path="/login" component={Login} />
             {!isAuthenticated(authedUser) ? (
               <Redirect to="/login" />
