@@ -63,7 +63,7 @@ class PollPreview extends Component {
                   ... {question.optionOne.text.split(" ")[0]}...
                 </Typography>
                 <Button
-                  fullWidth={true}
+                  fullWidth
                   color="primary"
                   variant="outlined"
                   onClick={e => this.toPoll(e, id)}

@@ -75,7 +75,7 @@ class NewQuestion extends Component {
           </Typography>
           <form onSubmit={this.handleSubmit}>
             <TextField
-              fullWidth={true}
+              fullWidth
               placeholder="this"
               value={optionOneText}
               onChange={this.handleChange("optionOneText")}
@@ -86,7 +86,7 @@ class NewQuestion extends Component {
               or
             </Typography>
             <TextField
-              fullWidth={true}
+              fullWidth
               placeholder="that"
               value={optionTwoText}
               onChange={this.handleChange("optionTwoText")}
@@ -98,7 +98,7 @@ class NewQuestion extends Component {
               className={classes.button}
               variant="outlined"
               color="primary"
-              fullWidth={true}
+              fullWidth
               disabled={optionOneText === "" || optionTwoText === ""}
             >
               Submit

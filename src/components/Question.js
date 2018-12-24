@@ -99,7 +99,7 @@ class Question extends Component {
                   />
                 </RadioGroup>
                 <Button
-                  fullWidth={true}
+                  fullWidth
                   color="primary"
                   variant="outlined"
                   onClick={e => this.handleSubmit(e)}
