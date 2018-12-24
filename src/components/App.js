@@ -13,6 +13,7 @@ import Login from "./Login";
 import Dashboard from "./Dashboard";
 import Poll from "./Poll";
 import NewQuestion from "./NewQuestion";
+import Leaderboard from "./Leaderboard";
 
 const styles = theme => ({
   root: {
@@ -61,6 +62,7 @@ class App extends Component {
               >
                 <Route exact path="/" component={Dashboard} />
                 <Route path="/new" component={NewQuestion} />
+                <Route path="/leaderboard" component={Leaderboard} />
                 <Route path="/questions/:id" component={Poll} />
               </Grid>
             </Grid>
