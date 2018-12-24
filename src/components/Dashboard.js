@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 
+import { withStyles } from '@material-ui/core/styles';
 import { Button, Grid } from "@material-ui/core";
 
 import PollPreview from "./PollPreview";
@@ -27,6 +28,12 @@ const _getAnsweredIds = (questions, authedUser) => {
     .sort((a, b) => questions[b].timestamp - questions[a].timestamp);
 };
 
+const styles = theme => ({
+  button: {
+    marginRight: 8
+  }
+});
+
 const mapStateToProps = ({ questions, authedUser }) => {
   return {
     unansweredQuestionIds: _getUnansweredIds(questions, authedUser),
@@ -46,13 +53,14 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { unansweredQuestionIds, answeredQuestionIds } = this.props;
+    const { classes, unansweredQuestionIds, answeredQuestionIds } = this.props;
     const { showAnswered } = this.state;
     return (
       <Fragment>
         <Button
           variant={showAnswered ? "outlined" : "contained"}
           color="primary"
+          className={classes.button}
           onClick={() => {
             this.handleToggle(false);
           }}
@@ -95,4 +103,4 @@ class Dashboard extends Component {
   }
 }
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps)(withStyles(styles)(Dashboard));
