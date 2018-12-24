@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -17,6 +17,9 @@ import { handleAddQuestion } from "../actions/questions";
 const styles = theme => ({
   card: {
     minWidth: 400
+  },
+  button: {
+    marginTop: 10
   }
 });
 
@@ -90,7 +93,14 @@ class NewQuestion extends Component {
               margin="dense"
               variant="outlined"
             />
-            <Button type="submit" color="primary" fullWidth={true}>
+            <Button
+              type="submit"
+              className={classes.button}
+              variant="outlined"
+              color="primary"
+              fullWidth={true}
+              disabled={optionOneText === "" || optionTwoText === ""}
+            >
               Submit
             </Button>
           </form>
@@ -100,4 +110,6 @@ class NewQuestion extends Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(withStyles(styles)(NewQuestion)));
+export default withRouter(
+  connect(mapStateToProps)(withStyles(styles)(NewQuestion))
+);
