@@ -1,15 +1,15 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { isEmpty } from "ramda";
 
 import { withStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 
 import { handleInitialData } from "../actions/shared";
-import { isAuthenticated } from "../utils/auth";
 
-import Nav from './Nav';
+import PrivateRoute from './PrivateRoute';
+import Nav from "./Nav";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
 import Poll from "./Poll";
@@ -25,9 +25,8 @@ const styles = theme => ({
   }
 });
 
-function mapStateToProps({ authedUser, questions, users }) {
+function mapStateToProps({ questions, users }) {
   return {
-    authedUser,
     loading: isEmpty(questions) && isEmpty(users)
   };
 }
@@ -38,7 +37,7 @@ class App extends Component {
   }
 
   render() {
-    const { authedUser, classes, loading } = this.props;
+    const { classes, loading } = this.props;
 
     if (loading) {
       return <div>Loading...</div>;
@@ -46,12 +45,8 @@ class App extends Component {
 
     return (
       <Router>
-        <Fragment>
+        <div>
           <Nav />
-          {/* <Route path="/login" component={Login} />
-            {!isAuthenticated(authedUser) ? (
-              <Redirect to="/login" />
-            ) : ( */}
           <Grid container className={classes.root} spacing={16}>
             <Grid item xs={12}>
               <Grid
@@ -62,15 +57,15 @@ class App extends Component {
                 alignItems="center"
                 spacing={16}
               >
-                <Route exact path="/" component={Dashboard} />
-                <Route path="/new" component={NewQuestion} />
-                <Route path="/leaderboard" component={Leaderboard} />
-                <Route path="/questions/:id" component={Poll} />
+                <PrivateRoute exact path="/" component={Dashboard} />
+                <Route path="/login" component={Login} />
+                <PrivateRoute path="/new" component={NewQuestion} />
+                <PrivateRoute path="/leaderboard" component={Leaderboard} />
+                <PrivateRoute path="/questions/:id" component={Poll} />
               </Grid>
             </Grid>
           </Grid>
-          {/* )} */}
-        </Fragment>
+        </div>
       </Router>
     );
   }

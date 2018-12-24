@@ -42,7 +42,7 @@ class Nav extends Component {
   };
 
   render() {
-    const { classes, user, location } = this.props;
+    const { classes, user } = this.props;
     const { pathname } = this.props.location;
     return (
       <div className={classes.root}>
