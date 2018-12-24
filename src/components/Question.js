@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/core/styles";
 import {
-  Avatar,
   Button,
   Card,
   CardContent,
@@ -16,16 +15,13 @@ import {
   Radio
 } from "@material-ui/core";
 
+import UserAvatar from './UserAvatar';
+
 import { handleAnswerQuestion } from "../actions/questions";
 
 const styles = theme => ({
   card: {
     minWidth: 400
-  },
-  avatar: {
-    margin: 5,
-    width: 80,
-    height: 80
   },
   question: {
     marginLeft: 20
@@ -73,11 +69,7 @@ class Question extends Component {
           <Divider />
           <Grid container spacing={24}>
             <Grid item xs={3}>
-              <Avatar
-                alt={author && author.name}
-                src={author && author.avatarURL}
-                className={classes.avatar}
-              />
+              <UserAvatar name={author && author.name} avatarURL={author && author.avatarURL} />
             </Grid>
             <Grid item xs={9}>
               <Grid

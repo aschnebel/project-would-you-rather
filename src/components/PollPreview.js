@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 import { withStyles } from "@material-ui/core/styles";
 import {
-  Avatar,
   Button,
   Card,
   CardContent,
@@ -12,15 +11,11 @@ import {
   Grid,
   Typography
 } from "@material-ui/core";
+import UserAvatar from "./UserAvatar";
 
 const styles = theme => ({
   card: {
     minWidth: 400
-  },
-  avatar: {
-    margin: 5,
-    width: 80,
-    height: 80
   },
   question: {
     marginLeft: 20
@@ -38,7 +33,6 @@ const mapStateToProps = ({ questions, users, authedUser }, { id }) => {
 };
 
 class PollPreview extends Component {
-
   toPoll = (e, id) => {
     e.preventDefault();
     this.props.history.push(`/questions/${id}`);
@@ -55,11 +49,7 @@ class PollPreview extends Component {
           <Divider />
           <Grid container spacing={24}>
             <Grid item xs={3}>
-              <Avatar
-                alt={author.name}
-                src={author.avatarURL}
-                className={classes.avatar}
-              />
+              <UserAvatar name={author.name} avatarURL={author.avatarURL} />
             </Grid>
             <Grid item xs={9}>
               <Grid
@@ -72,7 +62,11 @@ class PollPreview extends Component {
                 <Typography className={classes.question}>
                   ... {question.optionOne.text.split(" ")[0]}...
                 </Typography>
-                <Button fullWidth={true} color="primary" onClick={e => this.toPoll(e, id)}>
+                <Button
+                  fullWidth={true}
+                  color="primary"
+                  onClick={e => this.toPoll(e, id)}
+                >
                   View Pull
                 </Button>
               </Grid>
@@ -84,4 +78,6 @@ class PollPreview extends Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(withStyles(styles)(PollPreview)));
+export default withRouter(
+  connect(mapStateToProps)(withStyles(styles)(PollPreview))
+);

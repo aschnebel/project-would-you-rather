@@ -11,14 +11,11 @@ import {
   Divider
 } from "@material-ui/core";
 
+import UserAvatar from './UserAvatar';
+
 const styles = theme => ({
   card: {
     minWidth: 400
-  },
-  avatar: {
-    margin: 5,
-    width: 80,
-    height: 80
   },
   score: {
     margin: 5,
@@ -45,18 +42,7 @@ const UserScore = ({
       <CardContent>
         <Grid container spacing={24}>
           <Grid item xs={3}>
-            <Grid
-              container
-              direction="column"
-              justify="center"
-              alignItems="center"
-            >
-              <Avatar
-                alt={user.name}
-                src={user.avatarURL}
-                className={classes.avatar}
-              />
-            </Grid>
+            <UserAvatar name={user.name} avatarURL={user.avatarURL} />
           </Grid>
           <Grid item xs={6}>
             <Typography variant="subheading" gutterBottom={true}>
