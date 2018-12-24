@@ -5,6 +5,8 @@ import { Link, withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import { AppBar, Button, Toolbar, Typography, Avatar } from "@material-ui/core";
 
+import { logout } from "../actions/authedUser";
+
 const styles = {
   root: {
     flexGrow: 1
@@ -34,6 +36,11 @@ const mapStateToProps = ({ authedUser, users }) => {
 };
 
 class Nav extends Component {
+  handleLogout = () => {
+    const { dispatch } = this.props;
+    dispatch(logout());
+  };
+
   render() {
     const { classes, user, location } = this.props;
     const { pathname } = this.props.location;
@@ -72,9 +79,7 @@ class Nav extends Component {
                   Hello, {user.name}
                 </Typography>
                 <Avatar className={classes.avatar} src={user.avatarURL} />
-                <Link to="/login" className={classes.link}>
-                  <Button color="inherit">Logout</Button>
-                </Link>
+                <Button color="inherit" onClick={this.handleLogout}>Logout</Button>
               </Fragment>
             )}
           </Toolbar>

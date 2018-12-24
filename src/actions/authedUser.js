@@ -1,4 +1,5 @@
 export const SET_AUTHED_USER = "SET_AUTHED_USER";
+export const REMOVE_AUTHED_USER = "REMOVE_AUTHED_USER";
 
 export const authenticate = id => {
   return {
@@ -6,3 +7,10 @@ export const authenticate = id => {
     id
   };
 };
+
+export const logout = () => {
+  return {
+    type: REMOVE_AUTHED_USER
+  }
+}
+
