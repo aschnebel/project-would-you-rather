@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import Question from "./Question";
 import Result from "./Result";
+import PollNotFound from './PollNotFound';
 
 const mapStateToProps = ({ questions, authedUser }, props) => {
   const { id } = props.match.params;
@@ -25,9 +26,12 @@ const _isQuestionAnsweredFor = (question, authedUser) => {
 class Poll extends Component {
   render() {
     const { question, authedUser, id } = this.props;
-    return _isQuestionAnsweredFor(question, authedUser) 
-            ? (<Result qid={id} />) 
-            : (<Question qid={id} />);
+
+    return question 
+      ? _isQuestionAnsweredFor(question, authedUser) 
+          ? <Result qid={id} />
+          : <Question qid={id} />
+      : <PollNotFound />
   }
 }
 
