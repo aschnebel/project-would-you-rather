@@ -101,7 +101,9 @@ class Question extends Component {
                 <Button
                   fullWidth={true}
                   color="primary"
+                  variant="outlined"
                   onClick={e => this.handleSubmit(e)}
+                  disabled={answer === ""}
                 >
                   Submit
                 </Button>

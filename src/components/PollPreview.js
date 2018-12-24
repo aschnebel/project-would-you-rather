@@ -65,6 +65,7 @@ class PollPreview extends Component {
                 <Button
                   fullWidth={true}
                   color="primary"
+                  variant="outlined"
                   onClick={e => this.toPoll(e, id)}
                 >
                   View Pull
