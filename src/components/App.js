@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { isEmpty } from "ramda";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -8,13 +8,14 @@ import { Grid } from "@material-ui/core";
 
 import { handleInitialData } from "../actions/shared";
 
-import PrivateRoute from './PrivateRoute';
+import PrivateRoute from "./PrivateRoute";
 import Nav from "./Nav";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
 import Poll from "./Poll";
 import NewQuestion from "./NewQuestion";
 import Leaderboard from "./Leaderboard";
+import PageNotFound from "./PageNotFound";
 
 const styles = theme => ({
   root: {
@@ -57,11 +58,14 @@ class App extends Component {
                 alignItems="center"
                 spacing={16}
               >
-                <PrivateRoute exact path="/" component={Dashboard} />
-                <Route path="/login" component={Login} />
-                <PrivateRoute path="/new" component={NewQuestion} />
-                <PrivateRoute path="/leaderboard" component={Leaderboard} />
-                <PrivateRoute path="/questions/:id" component={Poll} />
+                <Switch>
+                  <PrivateRoute exact path="/" component={Dashboard} />
+                  <Route path="/login" component={Login} />
+                  <PrivateRoute path="/new" component={NewQuestion} />
+                  <PrivateRoute path="/leaderboard" component={Leaderboard} />
+                  <PrivateRoute path="/questions/:id" component={Poll} />
+                  <Route component={PageNotFound} />
+                </Switch>
               </Grid>
             </Grid>
           </Grid>
