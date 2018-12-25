@@ -58,7 +58,7 @@ class App extends Component {
                 <Switch>
                   <PrivateRoute exact path="/" component={Dashboard} />
                   <Route path="/login" component={Login} />
-                  <PrivateRoute path="/new" component={NewQuestion} />
+                  <PrivateRoute path="/add" component={NewQuestion} />
                   <PrivateRoute path="/leaderboard" component={Leaderboard} />
                   <PrivateRoute path="/questions/:id" component={Poll} />
                   <Route component={PageNotFound} />

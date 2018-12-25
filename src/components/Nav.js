@@ -56,10 +56,10 @@ class Nav extends Component {
                 Home
               </Button>
             </Link>
-            <Link to="/new" className={classes.link}>
+            <Link to="/add" className={classes.link}>
               <Button
-                variant={pathname === "/new" ? "contained" : null}
-                color={pathname === "/new" ? "primary" : "inherit"}
+                variant={pathname === "/add" ? "contained" : null}
+                color={pathname === "/add" ? "primary" : "inherit"}
               >
                 New Question
               </Button>
