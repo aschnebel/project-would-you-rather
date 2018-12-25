@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { LinearProgress, Typography } from "@material-ui/core";
+import { LinearProgress, Tooltip, Typography } from "@material-ui/core";
 
 const style = {
   vote: {
@@ -21,11 +21,13 @@ const Vote = ({ text, votes, totalVotes, active }) => (
     <Typography variant="subheading" gutterBottom={true} style={style.text}>
       Would you rather {text}
     </Typography>
-    <LinearProgress
-      value={(votes / totalVotes) * 100}
-      variant="determinate"
-      color={active ? "primary" : "secondary"}
-    />
+    <Tooltip title={`${Math.round((votes / totalVotes) * 100)}%`} placement="left">
+      <LinearProgress
+        value={(votes / totalVotes) * 100}
+        variant="determinate"
+        color={active ? "primary" : "secondary"}
+      />
+    </Tooltip>
     <Typography>
       {votes} out of {totalVotes} votes
     </Typography>
