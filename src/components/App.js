@@ -5,6 +5,7 @@ import { isEmpty } from "ramda";
 
 import { withStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
+import LoadingBar from "react-redux-loading";
 
 import { handleInitialData } from "../actions/shared";
 
@@ -17,12 +18,18 @@ import NewQuestion from "./NewQuestion";
 import Leaderboard from "./Leaderboard";
 import PageNotFound from "./PageNotFound";
 
+
 const styles = theme => ({
   root: {
     flexGrow: 1
   },
   questionType: {
     marginTop: 30
+  },
+  loading: {
+    backgroundColor: '#303F9F',
+    height: 3,
+    position: 'absolute'
   }
 });
 
@@ -38,16 +45,13 @@ class App extends Component {
   }
 
   render() {
-    const { classes, loading } = this.props;
-
-    if (loading) {
-      return <div>Loading...</div>;
-    }
+    const { classes } = this.props;
 
     return (
       <Router>
         <div>
           <Nav />
+          <LoadingBar className={classes.loading}/>
           <Grid container className={classes.root} spacing={16}>
             <Grid item xs={12}>
               <Grid
