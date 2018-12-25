@@ -11,9 +11,9 @@ import {
   Divider
 } from "@material-ui/core";
 
-import UserAvatar from './UserAvatar';
+import UserAvatar from "./UserAvatar";
 
-const styles = theme => ({
+const styles = () => ({
   card: {
     minWidth: 400
   },
@@ -30,50 +30,42 @@ const mapStateToProps = ({ users }, { id }) => {
   };
 };
 
-const UserScore = ({
-  classes,
-  user,
-  createdQuestions,
-  answeredQuestions,
-  score
-}) => {
-  return (
-    <Card className={classes.card}>
-      <CardContent>
-        <Grid container spacing={24}>
-          <Grid item xs={3}>
-            <UserAvatar name={user.name} avatarURL={user.avatarURL} />
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant="subheading" gutterBottom={true}>
-              {user.name}
-            </Typography>
-            <Typography variant="subheading">
-              Answered Questions: {answeredQuestions}
-            </Typography>
-            <Divider />
-            <Typography variant="subheading">
-              Created Questions: {createdQuestions}
-            </Typography>
-          </Grid>
-          <Grid item xs={3}>
-            <Typography variant="subheading" gutterBottom={true} align="center">
-              Score
-            </Typography>
-            <Divider variant="middle"/>
-            <Grid
-              container
-              direction="column"
-              justify="center"
-              alignItems="center"
-            >
-              <Avatar className={classes.score}>{score}</Avatar>
-            </Grid>
+const UserScore = ({classes, user, createdQuestions, answeredQuestions, score }) => (
+  <Card className={classes.card}>
+    <CardContent>
+      <Grid container spacing={24}>
+        <Grid item xs={3}>
+          <UserAvatar name={user.name} avatarURL={user.avatarURL} />
+        </Grid>
+        <Grid item xs={6}>
+          <Typography variant="subheading" gutterBottom={true}>
+            {user.name}
+          </Typography>
+          <Typography variant="subheading">
+            Answered Questions: {answeredQuestions}
+          </Typography>
+          <Divider />
+          <Typography variant="subheading">
+            Created Questions: {createdQuestions}
+          </Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Typography variant="subheading" gutterBottom={true} align="center">
+            Score
+          </Typography>
+          <Divider variant="middle" />
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+          >
+            <Avatar className={classes.score}>{score}</Avatar>
           </Grid>
         </Grid>
-      </CardContent>
-    </Card>
-  );
-};
+      </Grid>
+    </CardContent>
+  </Card>
+);
 
 export default connect(mapStateToProps)(withStyles(styles)(UserScore));

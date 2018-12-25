@@ -14,7 +14,7 @@ import {
 import Vote from "./Vote";
 import UserAvatar from "./UserAvatar";
 
-const styles = theme => ({
+const styles = () => ({
   card: {
     minWidth: 400
   }

@@ -14,7 +14,7 @@ import {
 
 import { handleAddQuestion } from "../actions/questions";
 
-const styles = theme => ({
+const styles = () => ({
   card: {
     minWidth: 400
   },

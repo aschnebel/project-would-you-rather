@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import UserAvatar from "./UserAvatar";
 
-const styles = theme => ({
+const styles = () => ({
   card: {
     minWidth: 400
   },

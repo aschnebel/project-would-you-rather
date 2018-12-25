@@ -4,31 +4,11 @@ import { connect } from "react-redux";
 import { withStyles } from '@material-ui/core/styles';
 import { Button, Grid } from "@material-ui/core";
 
+import { getAnsweredIds, getUnansweredIds } from '../utils/helper';
+
 import PollPreview from "./PollPreview";
 
-const _getUnansweredIds = (questions, authedUser) => {
-  return Object.keys(questions)
-    .filter(id => {
-      return (
-        !questions[id].optionOne.votes.includes(authedUser) &&
-        !questions[id].optionTwo.votes.includes(authedUser)
-      );
-    })
-    .sort((a, b) => questions[b].timestamp - questions[a].timestamp);
-};
-
-const _getAnsweredIds = (questions, authedUser) => {
-  return Object.keys(questions)
-    .filter(id => {
-      return (
-        questions[id].optionOne.votes.includes(authedUser) ||
-        questions[id].optionTwo.votes.includes(authedUser)
-      );
-    })
-    .sort((a, b) => questions[b].timestamp - questions[a].timestamp);
-};
-
-const styles = theme => ({
+const styles = () => ({
   button: {
     marginRight: 8
   }
@@ -36,8 +16,8 @@ const styles = theme => ({
 
 const mapStateToProps = ({ questions, authedUser }) => {
   return {
-    unansweredQuestionIds: _getUnansweredIds(questions, authedUser),
-    answeredQuestionIds: _getAnsweredIds(questions, authedUser)
+    unansweredQuestionIds: getUnansweredIds(questions, authedUser),
+    answeredQuestionIds: getAnsweredIds(questions, authedUser)
   };
 };
 

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { isEmpty } from "ramda";
 
 import { withStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
@@ -19,7 +18,7 @@ import Leaderboard from "./Leaderboard";
 import PageNotFound from "./PageNotFound";
 
 
-const styles = theme => ({
+const styles = () => ({
   root: {
     flexGrow: 1
   },
@@ -32,12 +31,6 @@ const styles = theme => ({
     position: 'absolute'
   }
 });
-
-function mapStateToProps({ questions, users }) {
-  return {
-    loading: isEmpty(questions) && isEmpty(users)
-  };
-}
 
 class App extends Component {
   componentDidMount() {
@@ -79,4 +72,4 @@ class App extends Component {
   }
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(App));
+export default connect()(withStyles(styles)(App));

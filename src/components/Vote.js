@@ -15,24 +15,22 @@ const style = {
   }
 };
 
-const Vote = ({ text, votes, totalVotes, active }) => {
-  return (
-    <div style={style.vote}>
-      {active ? <Typography variant="overline">Your Vote</Typography> : null}
-      <Typography variant="subheading" gutterBottom={true} style={style.text}>
-        Would you rather {text}
-      </Typography>
-      <LinearProgress
-        value={votes / totalVotes * 100}
-        variant="determinate"
-        color={active ? "primary" : "secondary"}
-      />
-      <Typography>
-        {votes} out of {totalVotes} votes
-      </Typography>
-    </div>
-  );
-};
+const Vote = ({ text, votes, totalVotes, active }) => (
+  <div style={style.vote}>
+    {active ? <Typography variant="overline">Your Vote</Typography> : null}
+    <Typography variant="subheading" gutterBottom={true} style={style.text}>
+      Would you rather {text}
+    </Typography>
+    <LinearProgress
+      value={(votes / totalVotes) * 100}
+      variant="determinate"
+      color={active ? "primary" : "secondary"}
+    />
+    <Typography>
+      {votes} out of {totalVotes} votes
+    </Typography>
+  </div>
+);
 
 Vote.propTypes = {
   text: PropTypes.string.isRequired,

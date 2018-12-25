@@ -19,7 +19,7 @@ import UserAvatar from './UserAvatar';
 
 import { handleAnswerQuestion } from "../actions/questions";
 
-const styles = theme => ({
+const styles = () => ({
   card: {
     minWidth: 400
   },
