@@ -64,9 +64,10 @@ class Login extends Component {
   render() {
     const { classes, users } = this.props;
     const { value, authenticated } = this.state;
+    const { from } = this.props.location.state || { from: { pathname: '/' } }
 
     if (authenticated) {
-      return <Redirect to="/" />;
+      return <Redirect to={from} />;
     }
 
     return (

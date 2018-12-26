@@ -11,7 +11,12 @@ const mapStateToProps = ({ authedUser }) => {
 
 const PrivateRoute = ({ component: Component, authedUser, ...rest }) => (
   <Route {...rest} render={ props =>
-      authedUser !== null ? <Component {...props} /> : <Redirect to="/login" />
+      authedUser !== null 
+        ? <Component {...props} /> 
+        : <Redirect to={{
+            pathname: "/login",
+            state: {from: props.location}
+        }} />
     } />
 );
 
