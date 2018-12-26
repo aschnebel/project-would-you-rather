@@ -6,7 +6,7 @@ import { Button, Typography } from "@material-ui/core";
 const PollNotFound = ({ history }) => (
   <div>
     <Typography variant="overline">
-      The Poll you've been looking for got lost...
+      The Poll you've been looking for does not exist.
     </Typography>
     <Button color="secondary" fullWidth onClick={() => history.push("/")}>
       Return to home
